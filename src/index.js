@@ -1,11 +1,24 @@
 import dotenv from "dotenv"
 import connectDB from "./db/index.js";
+import { app } from "./app.js";
 
 dotenv.config({
     path: './env'  //experimental code enabled in dev script to support this else use import 'dotenv/config'
 })
 
-connectDB();
+connectDB()
+    .then(() => {
+        app.on("error", (error) => {
+            console.log("App Encoutered an Error: ", error);
+            throw error
+        })
+        app.listen(process.env.PORT || 8000, () => {
+            console.log(`Server Running at port ${process.env.PORT}`);
+        })
+    })
+    .catch((err) => {
+        console.log("Monfo DB Connection Failiure occured: ", err)
+    })
 
 
 
