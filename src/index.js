@@ -1,7 +1,22 @@
-import mongoose from "mongoose";
-import {DB_NAME} from "./constants.js"
-import express from "express"
-import 'dotenv/config'
+import dotenv from "dotenv"
+import connectDB from "./db/index.js";
+
+dotenv.config({
+    path: './env'  //experimental code enabled in dev script to support this else use import 'dotenv/config'
+})
+
+connectDB();
+
+
+
+
+
+
+
+
+
+
+/*
 const app = express()
 
 ;( async () => {
@@ -19,3 +34,4 @@ const app = express()
         throw error
     }
 })()  //iffi - execute when defined - starts with semicolon
+*/
