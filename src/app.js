@@ -22,4 +22,11 @@ app.use(express.static("public"))  //used for static public data storage
 
 app.use(cookieParser()) // cookie manipulation securely using server
 
+
+//routes
+import userRouter from "./routes/user.routes.js";
+
+//routes declaration
+app.use("/api/v1/users", userRouter)
+
 export { app }
