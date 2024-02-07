@@ -187,7 +187,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
     try {
         user.password = newPassword
-        await user.save({ validateBeforeSave: falls })
+        await user.save({ validateBeforeSave: false })
 
         return res.status(200).json(new ApiResponse(200, {}, "Password Changed Successfully"))
     } catch (error) {
@@ -196,7 +196,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 })
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    return res.status(200).json(200, req.user, "User Fetched Successfully")
+    return res.status(200).json(new ApiResponse(200, req.user, "User Fetched Successfully"))
 })
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
@@ -222,6 +222,8 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
         .status(200)
         .json(new ApiResponse(200, user, "Account details updated successfully"))
 })
+
+//TODO: delete old images
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
     const avatarLocalPath = req.file?.path
